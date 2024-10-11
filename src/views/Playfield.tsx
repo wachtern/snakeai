@@ -2,12 +2,16 @@ import { useState } from "react";
 import styled from "styled-components";
 import GameField from "../components/GameField";
 
-const Playfield = () => {
+interface Props {
+  fieldSize: number;
+}
+
+const Playfield = ({ fieldSize }: Props) => {
   const [isGameOver, setIsGameOver] = useState(false);
 
   return (
     <Container>
-      <CustomGameField fieldSize={15} />
+      <CustomGameField fieldSize={fieldSize >= 7 ? fieldSize : 7} />
     </Container>
   );
 };
