@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import useBoundStore from "../stores/BoundStore";
 
 interface Props {
   fieldSize: number;
@@ -14,6 +15,9 @@ const GameField = ({ fieldSize, className }: Props) => {
   ]);
   const [direction, setDirection] = useState<number>(1);
   const [directionChanged, setDirectionChanged] = useState<boolean>(false);
+
+  const stepsRemaining = useBoundStore((state) => state.stepsRemaining);
+  const setStepsRemaining = useBoundStore((state) => state.setStepsRemaining);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -77,6 +81,8 @@ const GameField = ({ fieldSize, className }: Props) => {
     }
 
     setDirectionChanged(false);
+    setStepsRemaining(stepsRemaining - 1);
+    console.log(stepsRemaining);
 
     if (
       head[0] < 0 ||
@@ -84,11 +90,13 @@ const GameField = ({ fieldSize, className }: Props) => {
       head[1] < 0 ||
       head[1] >= fieldSize
     ) {
+      // Add function later
       alert("Game Over!");
       return;
     }
 
     if (newSnake.some(([x, y]) => x === head[0] && y === head[1])) {
+      // Add function later
       alert("Game Over!");
       return;
     }
@@ -118,12 +126,14 @@ const GameField = ({ fieldSize, className }: Props) => {
     );
 
     if (availableCells.length === 0) {
+      // Add function later
       alert("You've won!");
       return;
     }
 
     const newFoodIndex = Math.floor(Math.random() * availableCells.length);
     setFood(availableCells[newFoodIndex]);
+    setStepsRemaining(stepsRemaining + 100);
   };
 
   useEffect(() => {
