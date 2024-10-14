@@ -6,7 +6,7 @@ import Playfield from "./views/Playfield";
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Playfield fieldSize={15} />
+      <Playfield />
     </ThemeProvider>
   );
 }
