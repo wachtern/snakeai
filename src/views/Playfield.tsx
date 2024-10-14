@@ -1,11 +1,8 @@
-import { useState } from "react";
 import styled from "styled-components";
 import GameField from "../components/GameField";
 import useBoundStore from "../stores/BoundStore";
 
 const Playfield = () => {
-  const [isGameOver, setIsGameOver] = useState(false);
-
   const fieldSize = useBoundStore((state) => state.fieldSize);
 
   return (
