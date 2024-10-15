@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import useBoundStore from "../stores/BoundStore";
 
@@ -115,20 +115,19 @@ const GameField = ({ fieldSize, className }: Props) => {
 
     const availableCells = allCells.filter(
       ([x, y]) =>
-        !snake.some(([snakeX, snakeY]) => snakeX === x && snakeY === y)
+        !snake.some(([snakeX, snakeY]) => snakeX === x && snakeY === y) &&
+        (x !== food[0] || y !== food[1])
     );
-
-    console.log(availableCells.length);
 
     if (availableCells.length === 0) {
       // Add function later
       alert("You've won!");
       return;
+    } else {
+      const newFoodIndex = Math.floor(Math.random() * availableCells.length);
+      setFood(availableCells[newFoodIndex]);
+      setStepsRemaining(stepsRemaining + 100);
     }
-
-    const newFoodIndex = Math.floor(Math.random() * availableCells.length);
-    setFood(availableCells[newFoodIndex]);
-    setStepsRemaining(stepsRemaining + 100);
   };
 
   useEffect(() => {
@@ -137,7 +136,7 @@ const GameField = ({ fieldSize, className }: Props) => {
     }
   }, [directionChanged]);
 
-  const grid = generateGrid();
+  const grid = useMemo(() => generateGrid(), [snake, food]);
 
   return (
     <Container className={className} fieldSize={fieldSize}>
