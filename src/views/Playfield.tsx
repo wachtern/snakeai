@@ -7,7 +7,7 @@ const Playfield = () => {
 
   return (
     <Container>
-      <CustomGameField fieldSize={fieldSize >= 70 ? fieldSize : 4} />
+      <CustomGameField fieldSize={fieldSize >= 5 ? fieldSize : 4} />
     </Container>
   );
 };
