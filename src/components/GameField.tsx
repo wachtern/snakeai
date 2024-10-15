@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import useBoundStore from "../stores/BoundStore";
 
@@ -82,32 +82,25 @@ const GameField = ({ fieldSize, className }: Props) => {
 
     setDirectionChanged(false);
     setStepsRemaining(stepsRemaining - 1);
-    console.log(stepsRemaining);
 
     if (
       head[0] < 0 ||
       head[0] >= fieldSize ||
       head[1] < 0 ||
-      head[1] >= fieldSize
+      head[1] >= fieldSize ||
+      newSnake.some(([x, y]) => x === head[0] && y === head[1])
     ) {
-      // Add function later
       alert("Game Over!");
       return;
     }
-
-    if (newSnake.some(([x, y]) => x === head[0] && y === head[1])) {
-      // Add function later
-      alert("Game Over!");
-      return;
-    }
-
-    newSnake.unshift(head);
 
     if (head[0] === food[0] && head[1] === food[1]) {
       generateFood();
     } else {
       newSnake.pop();
     }
+
+    newSnake.unshift(head);
 
     setSnake(newSnake);
   };
@@ -122,29 +115,28 @@ const GameField = ({ fieldSize, className }: Props) => {
 
     const availableCells = allCells.filter(
       ([x, y]) =>
-        !snake.some(([snakeX, snakeY]) => snakeX === x && snakeY === y)
+        !snake.some(([snakeX, snakeY]) => snakeX === x && snakeY === y) &&
+        (x !== food[0] || y !== food[1])
     );
 
     if (availableCells.length === 0) {
       // Add function later
       alert("You've won!");
       return;
+    } else {
+      const newFoodIndex = Math.floor(Math.random() * availableCells.length);
+      setFood(availableCells[newFoodIndex]);
+      setStepsRemaining(stepsRemaining + 100);
     }
-
-    const newFoodIndex = Math.floor(Math.random() * availableCells.length);
-    setFood(availableCells[newFoodIndex]);
-    setStepsRemaining(stepsRemaining + 100);
   };
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    if (directionChanged === true) {
       moveSnake();
-    }, 200);
+    }
+  }, [directionChanged]);
 
-    return () => clearInterval(interval);
-  }, [snake, direction]);
-
-  const grid = generateGrid();
+  const grid = useMemo(() => generateGrid(), [snake, food]);
 
   return (
     <Container className={className} fieldSize={fieldSize}>
