@@ -24,7 +24,7 @@ const Container = styled.div`
   justify-content: flex-start;
   align-items: center;
   box-sizing: border-box;
-  padding: min(10vw, 10vh);
+  padding: min(5vw, 5vh);
 
   @media (min-aspect-ratio: 1/1) {
     flex-direction: row;
