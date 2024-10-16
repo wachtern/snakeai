@@ -150,9 +150,11 @@ const GameField = ({ fieldSize, className }: Props) => {
 export default GameField;
 
 const Container = styled.div<{ fieldSize: number }>`
-  min-width: 100px;
-  min-height: 100px;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
   display: grid;
+  aspect-ratio: 1/1;
   grid-template-columns: repeat(${(props) => props.fieldSize}, 1fr);
   grid-template-rows: repeat(${(props) => props.fieldSize}, 1fr);
 `;
