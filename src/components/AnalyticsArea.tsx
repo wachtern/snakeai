@@ -42,6 +42,8 @@ const AnalyticsArea = () => {
   return (
     <Container>
       <Title>SnakeAI</Title>
+      {/* Remove WIP later */}
+      <Text>Work in Progress</Text>
       <Analytics>
         <Column>
           <TextWrapper>
