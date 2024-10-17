@@ -12,4 +12,23 @@ export const theme = {
       apple: "#EE4E4E",
     },
   },
+  fontStyles: {
+    title: {
+      fontFamily: '"Arial", sans-serif',
+      fontSize: "min(5vw, 5vh)",
+      color: "#EEEEEE",
+      fontWeight: "bold",
+    },
+    subtitle: {
+      fontFamily: '"Arial", sans-serif',
+      fontSize: "min(2.5vw, 2.5vh)",
+      color: "#EEEEEE",
+      fontWeight: "bold",
+    },
+    text: {
+      fontFamily: '"Arial", sans-serif',
+      fontSize: "min(2vw, 2vh)",
+      color: "#EEEEEE",
+    },
+  },
 };
