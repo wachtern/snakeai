@@ -30,5 +30,11 @@ export const theme = {
       fontSize: "min(2vw, 2vh)",
       color: "#EEEEEE",
     },
+    gitHub: {
+      fontFamily: '"Arial", sans-serif',
+      fontSize: "min(1.5vw, 1.5vh)",
+      color: "#EEEEEE",
+      fontWeight: "bold",
+    },
   },
 };

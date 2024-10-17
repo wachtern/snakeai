@@ -2,12 +2,19 @@ import styled from "styled-components";
 import GameField from "../components/GameField";
 import useBoundStore from "../stores/BoundStore";
 import AnalyticsArea from "../components/AnalyticsArea";
+import gitHubLogo from "../assets/logos/github.png";
 
 const Playfield = () => {
   const fieldSize = useBoundStore((state) => state.fieldSize);
 
   return (
     <Container>
+      <GitHubWrapper href="https://github.com/wachtern/snakeai" target="_blank">
+        {/* Remove WIP later */}
+        View on GitHub <br /> (Work in Progress)
+        <GitHub src={gitHubLogo} />
+      </GitHubWrapper>
+
       <GameField fieldSize={fieldSize >= 5 ? fieldSize : 4} />
       <AnalyticsArea />
     </Container>
@@ -35,4 +42,35 @@ const Container = styled.div`
     flex-direction: column;
     gap: 2.5vh;
   }
+`;
+
+const GitHubWrapper = styled.a`
+  ${({ theme }) => theme.fontStyles.gitHub}
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  gap: 1vh;
+  opacity: 60%;
+  cursor: pointer;
+  text-decoration: none;
+
+  @media (min-aspect-ratio: 1/1) {
+    flex-direction: row;
+  }
+
+  @media (max-aspect-ratio: 1/1) {
+    flex-direction: column-reverse;
+  }
+
+  &:hover {
+    opacity: 100%;
+  }
+`;
+
+const GitHub = styled.img`
+  width: min(7.5vw, 7.5vh);
+  height: min(7.5vw, 7.5vh);
 `;
