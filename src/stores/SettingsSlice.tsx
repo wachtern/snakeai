@@ -6,7 +6,7 @@ export interface SettingsSlice {
 }
 
 const createSettingsSlice: StateCreator<SettingsSlice> = (set) => ({
-  fieldSize: 7,
+  fieldSize: 8,
   setFieldSize: (size) => set({ fieldSize: size }),
 });
 

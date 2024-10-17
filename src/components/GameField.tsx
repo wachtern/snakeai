@@ -17,7 +17,12 @@ const GameField = ({ fieldSize, className }: Props) => {
   const [directionChanged, setDirectionChanged] = useState<boolean>(false);
 
   const stepsRemaining = useBoundStore((state) => state.stepsRemaining);
+  const score = useBoundStore((state) => state.score);
+  const highscore = useBoundStore((state) => state.highscore);
+
   const setStepsRemaining = useBoundStore((state) => state.setStepsRemaining);
+  const setScore = useBoundStore((state) => state.setScore);
+  const setHighscore = useBoundStore((state) => state.setHighscore);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -126,7 +131,8 @@ const GameField = ({ fieldSize, className }: Props) => {
     } else {
       const newFoodIndex = Math.floor(Math.random() * availableCells.length);
       setFood(availableCells[newFoodIndex]);
-      setStepsRemaining(stepsRemaining + 100);
+      setStepsRemaining(stepsRemaining + 50);
+      setScore(score + 1);
     }
   };
 
@@ -135,6 +141,12 @@ const GameField = ({ fieldSize, className }: Props) => {
       moveSnake();
     }
   }, [directionChanged]);
+
+  useEffect(() => {
+    if (highscore < score) {
+      setHighscore(score);
+    }
+  }, [score]);
 
   const grid = useMemo(() => generateGrid(), [snake, food]);
 
