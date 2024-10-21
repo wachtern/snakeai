@@ -115,6 +115,7 @@ const Analytics = styled.div`
   display: flex;
   justify-content: center;
   align-items: start;
+  gap: min(0.5vw, 0.5vh);
 `;
 
 const TextWrapper = styled.div`

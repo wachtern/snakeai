@@ -4,6 +4,8 @@ export const theme = {
       black: "#111111",
       white: "#EEEEEE",
       background: "#242424",
+      inputBackground: "#363636",
+      inputBorder: "#5e5e5e",
     },
     game: {
       background: "#363636",

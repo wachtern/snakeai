@@ -3,8 +3,12 @@ import GameField from "../components/GameField";
 import useBoundStore from "../stores/BoundStore";
 import AnalyticsArea from "../components/AnalyticsArea";
 import gitHubLogo from "../assets/logos/github.png";
+import { useState } from "react";
+import SettingsArea from "../components/SettingsArea";
 
 const Playfield = () => {
+  const [screen, setScreen] = useState<boolean>(false);
+
   const fieldSize = useBoundStore((state) => state.fieldSize);
 
   return (
@@ -14,9 +18,8 @@ const Playfield = () => {
         View on GitHub <br /> (Work in Progress)
         <GitHub src={gitHubLogo} />
       </GitHubWrapper>
-
       <GameField fieldSize={fieldSize >= 5 ? fieldSize : 4} />
-      <AnalyticsArea />
+      {screen ? <AnalyticsArea /> : <SettingsArea />}
     </Container>
   );
 };
