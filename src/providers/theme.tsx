@@ -5,6 +5,7 @@ export const theme = {
       white: "#EEEEEE",
       background: "#242424",
       inputBackground: "#363636",
+      inputDisabled: "#262626",
       inputBorder: "#5e5e5e",
     },
     game: {

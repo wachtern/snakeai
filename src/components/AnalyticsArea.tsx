@@ -97,7 +97,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: min(5vh, 5vw);
 
   @media (min-aspect-ratio: 1/1) {
     flex-basis: calc(90vw - 70vh);
@@ -115,7 +115,7 @@ const Analytics = styled.div`
   display: flex;
   justify-content: center;
   align-items: start;
-  gap: min(0.5vw, 0.5vh);
+  gap: min(5vw, 5vh);
 `;
 
 const TextWrapper = styled.div`

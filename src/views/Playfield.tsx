@@ -3,11 +3,10 @@ import GameField from "../components/GameField";
 import useBoundStore from "../stores/BoundStore";
 import AnalyticsArea from "../components/AnalyticsArea";
 import gitHubLogo from "../assets/logos/github.png";
-import { useState } from "react";
 import SettingsArea from "../components/SettingsArea";
 
 const Playfield = () => {
-  const [screen, setScreen] = useState<boolean>(false);
+  const screen = useBoundStore((state) => state.screen);
 
   const fieldSize = useBoundStore((state) => state.fieldSize);
 
@@ -18,7 +17,10 @@ const Playfield = () => {
         View on GitHub <br /> (Work in Progress)
         <GitHub src={gitHubLogo} />
       </GitHubWrapper>
-      <GameField fieldSize={fieldSize >= 5 ? fieldSize : 4} />
+      <CustomGameField
+        fieldSize={fieldSize >= 5 ? fieldSize : 4}
+        screen={screen}
+      />
       {screen ? <AnalyticsArea /> : <SettingsArea />}
     </Container>
   );
@@ -76,4 +78,8 @@ const GitHubWrapper = styled.a`
 const GitHub = styled.img`
   width: min(7.5vw, 7.5vh);
   height: min(7.5vw, 7.5vh);
+`;
+
+const CustomGameField = styled(GameField)<{ screen: boolean }>`
+  ${({ screen }) => (screen === false ? `opacity: 0;` : `opacity: 100%;`)}
 `;

@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import InputNumber from "./InputNumber";
 import useBoundStore from "../stores/BoundStore";
+import Button from "./Button";
 
 const SettingsArea = () => {
   const fieldSize = useBoundStore((state) => state.fieldSize);
+  const setScreen = useBoundStore((state) => state.setScreen);
 
   return (
     <Container>
@@ -14,15 +16,33 @@ const SettingsArea = () => {
         <Column>
           <TextWrapper>
             <SubTitle>Fieldsize</SubTitle>
-            <InputNumber defaultValue={fieldSize} min={8} max={16} />
+            <InputNumber defaultValue={fieldSize} min={8} max={32} />
+          </TextWrapper>
+          <TextWrapper>
+            <SubTitle>Allowed Steps at start</SubTitle>
+            <InputNumber defaultValue={100} min={10} max={999} />
+          </TextWrapper>
+          <TextWrapper>
+            <SubTitle>Neural Network Layer 1 size</SubTitle>
+            <InputNumber defaultValue={16} min={5} max={99} />
           </TextWrapper>
         </Column>
         <Column>
           <TextWrapper>
-            <SubTitle>Fieldsize</SubTitle>
+            <SubTitle>Individuals per Generation</SubTitle>
+            <InputNumber defaultValue={100} min={5} max={999} />
+          </TextWrapper>
+          <TextWrapper>
+            <SubTitle>Steps added per Apple</SubTitle>
+            <InputNumber defaultValue={100} min={5} max={999} />
+          </TextWrapper>
+          <TextWrapper>
+            <SubTitle>Neural Network Layer 2 size</SubTitle>
+            <InputNumber defaultValue={16} min={5} max={99} />
           </TextWrapper>
         </Column>
       </Settings>
+      <Button text={"Start"} onClick={() => setScreen(true)} />
     </Container>
   );
 };
@@ -36,7 +56,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: min(5vh, 5vw);
 
   @media (min-aspect-ratio: 1/1) {
     flex-basis: calc(90vw - 70vh);
@@ -54,7 +74,7 @@ const Settings = styled.div`
   display: flex;
   justify-content: center;
   align-items: start;
-  gap: min(0.5vw, 0.5vh);
+  gap: min(5vw, 5vh);
 `;
 
 const TextWrapper = styled.div`
